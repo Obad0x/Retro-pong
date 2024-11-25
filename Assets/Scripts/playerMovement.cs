@@ -27,22 +27,22 @@ public class playerMovement : MonoBehaviour
         transform.position = newposition;
     }
 
-    // private void OnCollisionEnter2D(Collision2D other) {
-    //     if(collision.gameObject.compareTag("Ball")){
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(collision.gameObject.compareTag("Ball")){
             
-    //         Rigidbody2D ballRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+            Rigidbody2D ballRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
 
-    //         if(ballRigidbody != null){
-    //             float hitFactor = (collision.transform.position.y - transform.position.y);
+            if(ballRigidbody != null){
+                float hitFactor = (collision.transform.position.y - transform.position.y);
 
-    //             Vector2 reflectedDirection = Vector2.Reflect(ballRigidbody.velocity , collision.contacts[0].normal);
+                Vector2 reflectedDirection = Vector2.Reflect(ballRigidbody.velocity , collision.contacts[0].normal);
 
-    //             reflectedDirection.y += hitfactor * 2f;
+                reflectedDirection.y += hitFactor * 2f;
 
-    //             ballRigidbody.velocity = reflectedDirection.normalized * ballRigidbody.velocity.magnitude;
-    //         }
-    //     }
+                ballRigidbody.velocity = reflectedDirection.normalized * ballRigidbody.velocity.magnitude;
+            }
+        }
 
 
-    // }
+    }
 }
