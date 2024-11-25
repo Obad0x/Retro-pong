@@ -6,8 +6,8 @@ public class playerMovement : MonoBehaviour
 {
    public float moveSpeed = 10f;
 
-   public float minY =-4f;
-   public float maxY = 4f;
+   public float minY =-2.7f;
+   public float maxY = 2.7f;
 
         public GameObject ball;
 
@@ -24,25 +24,25 @@ public class playerMovement : MonoBehaviour
         newposition.y = Mathf.Clamp(newposition.y, minY , maxY);
 
             // update paddle position
-        transform.position = new position
+        transform.position = newposition;
     }
 
-    private void private void OnCollisionEnter2D(Collision2D other) {
-        if(collision.gameObject.compareTag("Ball")){
+    // private void OnCollisionEnter2D(Collision2D other) {
+    //     if(collision.gameObject.compareTag("Ball")){
             
-            Rigidbody2D ballRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+    //         Rigidbody2D ballRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
 
-            if(ballRigidbody != null){
-                float hitFactor = (collision.transform.position.y - transform.position.y);
+    //         if(ballRigidbody != null){
+    //             float hitFactor = (collision.transform.position.y - transform.position.y);
 
-                Vector2 reflectedDirection = Vector2.Reflect(ballRigidbody.velocity , collision.contacts[0].normal);
+    //             Vector2 reflectedDirection = Vector2.Reflect(ballRigidbody.velocity , collision.contacts[0].normal);
 
-                reflectedDirection.y += hitfactor * 2f;
+    //             reflectedDirection.y += hitfactor * 2f;
 
-                ballRigidbody.velocity = reflectedDirection.normalized * ballRigidbody.velocity.magnitude
-            }
-        }
+    //             ballRigidbody.velocity = reflectedDirection.normalized * ballRigidbody.velocity.magnitude;
+    //         }
+    //     }
 
 
-    }
+    // }
 }
