@@ -27,7 +27,7 @@ public class playerMovement : MonoBehaviour
         transform.position = newposition;
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.compareTag("Ball")){
             
             Rigidbody2D ballRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
