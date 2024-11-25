@@ -28,7 +28,7 @@ public class playerMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.gameObject.compareTag("Ball")){
+        if(collision.gameObject.CompareTag("Ball")){
             
             Rigidbody2D ballRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
 
