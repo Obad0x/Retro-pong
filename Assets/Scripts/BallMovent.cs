@@ -9,22 +9,24 @@ public class BallMovent : MonoBehaviour
 
     // randomness to initial direction
     public float randomness = 30f;
-
+    // storing the rigidbody in a variable
     private Rigidbody2D rb;
+    // boolean to check if the game has started initally false
     private bool isGameStarted = false;
 
 
     // Start is called before the first frame update
      private void Start()
-    {
+    {       //get the rigidbody component
             rb = GetComponent<Rigidbody2D>();
-
+            // set the tag of the ball at start
             gameObject.tag = "Ball" ;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // check if the game has started
       if (!isGameStarted && Input.GetKeyDown("space")) {
         LaunchBall();
       }
@@ -54,6 +56,17 @@ public class BallMovent : MonoBehaviour
     isGameStarted = true ;
 }
 
+public void ResetBall()
+    {
+        // Stop the ball
+        rb.velocity = Vector2.zero;
+
+        // Reset position to center
+        transform.position = Vector2.zero;
+
+        // Reset game start flag
+        isGameStarted = false;
+    }
 
 }
 
