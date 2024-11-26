@@ -13,12 +13,21 @@ public class BallMovent : MonoBehaviour
     private Rigidbody2D rb;
     // boolean to check if the game has started initally false
     private bool isGameStarted = false;
+    public float minBounceAngle = 10f;  // Minimum angle after bounce
+    public float maxBounceAngle = 70f;
+
+       // Speed maintenance
+    public float constantSpeed = 10f;
 
 
     // Start is called before the first frame update
      private void Start()
     {       //get the rigidbody component
             rb = GetComponent<Rigidbody2D>();
+            if (rb != null)
+        {
+            rb.velocity = rb.velocity.normalized * constantSpeed;
+        }
             // set the tag of the ball at start
             gameObject.tag = "Ball" ;
     }
@@ -55,6 +64,28 @@ public class BallMovent : MonoBehaviour
     // Mark the game as started 
     isGameStarted = true ;
 }
+
+   private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if colliding with walls (top or bottom)
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            // Get current velocity
+            Vector2 currentVelocity = rb.velocity;
+
+            // Reflect the velocity while maintaining speed
+            Vector2 reflectedVelocity = Vector2.Reflect(currentVelocity, collision.contacts[0].normal);
+
+            // Modify the angle to prevent straight horizontal movement
+            float angleVariation = Random.Range(minBounceAngle, maxBounceAngle);
+            
+            // Ensure the ball doesn't bounce too vertically
+            reflectedVelocity = Quaternion.Euler(0, 0, Random.Range(-angleVariation, angleVariation)) * reflectedVelocity;
+
+            // Normalize and set to constant speed
+            rb.velocity = reflectedVelocity.normalized * constantSpeed;
+        }
+    }
 
 public void ResetBall()
     {
